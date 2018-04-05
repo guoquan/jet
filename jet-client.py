@@ -35,7 +35,6 @@ class Client(object):
         self.start()
         
 def jet_command(server, username, password, reverse, flags, options):
-    # 'sshpass -p "9ol.*IK<" ssh -R 101.132.186.76:8079:192.168.7.181:32784 -l jet 101.132.186.76'
     command = ['sshpass',]
     if password:
         command.append('-p')
@@ -126,16 +125,10 @@ def main():
     client.start()
     time.sleep(5)
     
-    #alive_monitor = Monitor(client, **config['monitors']['alive_monitor'])
-    #alive_monitor.start()
     http_monitor = HttpMonitor(client, **config.monitors['http_monitor'])
     http_monitor.start()
-    #process_monitor = ProcessMonitor(client, **config['monitors']['process_monitor'])
-    #process_monitor.start()
     
-    #alive_monitor.join()
     http_monitor.join()
-    #process_monitor.join()
     
 if __name__ == '__main__':
     main()
